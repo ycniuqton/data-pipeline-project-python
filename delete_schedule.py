@@ -5,7 +5,7 @@ from temporalio.client import Client
 
 
 async def main():
-    client = await Client.connect("localhost:7233")
+    client = await Client.connect("10.3.95.62:7233")
     handle = client.get_schedule_handle(
         "top-stories-every-10-hours",
     )

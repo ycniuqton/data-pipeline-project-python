@@ -5,23 +5,26 @@ import pandas as pd
 from temporalio.client import Client
 
 from activities import TASK_QUEUE_NAME
-from your_workflow import TemporalCommunityWorkflow
+# from your_workflow import CustomWorkflow
+from wf2 import CustomWorkflow
+import uuid
+
+
+def generate_uuid():
+    return uuid.uuid4()
 
 
 async def main():
-    client = await Client.connect("localhost:7233")
-
+    client = await Client.connect("10.3.95.62:7233")
+    random_id = generate_uuid().__str__()
+    print(random_id)
     stories = await client.execute_workflow(
-        TemporalCommunityWorkflow.run,
-        id="temporal-community-workflow",
+        CustomWorkflow.run_workflow,
+        id=random_id,
         task_queue=TASK_QUEUE_NAME,
     )
-    df = pd.DataFrame(stories)
-    df.columns = ["Title", "URL", "Views"]
-    print("Top 10 stories on Temporal Community:")
-    print(df)
-    return df
-
+    [print(i) for i in stories.get('event_chain')]
+    return stories
 
 if __name__ == "__main__":
     asyncio.run(main())
