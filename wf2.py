@@ -55,8 +55,11 @@ class CustomWorkflow:
         # Instantiate command objects for each step of the workflow
         workflow_commands = [WorkflowStep(activity, params) for activity, params in activities_and_params]
 
+        c = 0
         # Run the workflow
         for command in workflow_commands:
+            print(c)
+            c+=1
             event_stage = await command.execute(event_stage)
 
         return event_stage

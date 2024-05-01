@@ -7,7 +7,7 @@ from temporalio import activity
 from temporalio import workflow
 
 
-TASK_QUEUE_NAME = "123"
+TASK_QUEUE_NAME = "NEW_TASK_QUEUE_NAME"
 
 
 @dataclass

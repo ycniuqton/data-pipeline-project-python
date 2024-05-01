@@ -18,6 +18,11 @@ async def main():
     client = await Client.connect("10.3.95.62:7233")
     random_id = generate_uuid().__str__()
     print(random_id)
+    # client.start_workflow(
+    #     CustomWorkflow,
+    #     id=random_id,
+    #     # task_queue=TASK_QUEUE_NAME
+    # )
     stories = await client.execute_workflow(
         CustomWorkflow.run_workflow,
         id=random_id,
